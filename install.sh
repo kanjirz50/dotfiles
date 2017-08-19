@@ -19,6 +19,7 @@ for f in .??*
 do
     # 除外リスト
     [[ "$f" == ".git" ]] && continue
+    [[ "$f" == ".gitignore" ]] && continue
     [[ "$f" == ".DS_Store" ]] && continue
 
     ln -snfv ${DOTFILES_PATH}/"${f}" ~/"${f}"
