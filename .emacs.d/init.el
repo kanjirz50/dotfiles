@@ -1,23 +1,27 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 (package-initialize)
-
-;; パッケージ情報の更新
-;;(package-refresh-contents)
 
 ;; インストールするパッケージ
 (defvar my/favorite-packages
   '(
     init-loader
     helm
+    popwin
     col-highlight
     company
-    tabbar
-    elscreen
+    company-quickhelp
+    pos-tip
+    company-jedi
+    jedi-core
+    epc
+    virtualenvwrapper
+    auto-virtualenvwrapper
     visual-regexp
     mwim
+    smartparens
     ))
 
 ;; my/favorite-packagesからインストールしていないパッケージをインストール
