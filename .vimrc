@@ -1,6 +1,8 @@
 set encoding=utf-8
 set showcmd
 
+colorscheme molokai
+
 set number
 set cursorline
 set smartindent
