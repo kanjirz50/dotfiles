@@ -24,3 +24,15 @@ function _pip_completion {
         PIP_AUTO_COMPLETE=1 $words[1] ) )
 }
 compctl -K _pip_completion pip
+
+# fzfによる
+function select-history() {
+    BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+    CURSOR=$#BUFFER
+}
+
+if [ -x "`whence fzf`" ]; then
+   echo "fzf settings"
+   zle -N select-history
+   bindkey '^r' select-history
+fi
