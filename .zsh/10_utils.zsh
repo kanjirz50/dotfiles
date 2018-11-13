@@ -32,7 +32,6 @@ function select-history() {
 }
 
 if [ -x "`whence fzf`" ]; then
-   echo "fzf settings"
    zle -N select-history
    bindkey '^r' select-history
 fi
