@@ -6,4 +6,6 @@ eval "$(pyenv virtualenv-init -)"
 
 zplug $(pyenv root)/completions/pyenv.zsh, from:local
 
-eval "$(thefuck --alias)"
+if [ -x "`whence thefuck`" ]; then
+   eval "$(thefuck --alias)"
+fi
