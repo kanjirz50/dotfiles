@@ -8,20 +8,26 @@
 (defvar my/favorite-packages
   '(
     init-loader
+    flycheck
     helm
+    helm-flycheck
     popwin
     col-highlight
     company
     company-quickhelp
+    git-gutter
     pos-tip
     company-jedi
     jedi-core
     epc
+    undohist
+    undo-tree
     virtualenvwrapper
     auto-virtualenvwrapper
     visual-regexp
     mwim
     smartparens
+    dockerfile-mode
     ))
 
 ;; my/favorite-packagesからインストールしていないパッケージをインストール
@@ -43,3 +49,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(col-highlight ((t (:inherit hl-line)))))
+(put 'upcase-region 'disabled nil)
+
+(add-hook 'after-init-hook #'global-flycheck-mode)

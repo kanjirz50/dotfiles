@@ -3,6 +3,8 @@
 (helm-mode 1)
 (helm-autoresize-mode t)
 
+(setq make-backup-files nil)
+
 ;; C-hで前の文字削除
 (define-key helm-map (kbd "C-h") 'delete-backward-char)
 (define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
@@ -84,7 +86,7 @@
 (setq company-minimum-prefix-length 2) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 (setq company-tooltip-limit 20)
-(setq company-begin-commands '(self-insert-command))')
+(setq company-begin-commands '(self-insert-command))
 (setq completion-ignore-case t)
 (setq company-dabbrev-downcase nil)
 
@@ -114,15 +116,44 @@
 (set-face-background 'show-paren-match-face "blue")
 
 ;; create backup file in ~/.emacs.d/backup
-(setq make-backup-files t)
-(setq backup-directory-alist
-  (cons (cons "\\.*$" (expand-file-name "~/.emacs.d/backup"))
-    backup-directory-alist))
+(setq backup-directory-alist '((".*" . "~/.emacs.d/backup")))
+;; 番号付けによる複数保存
+(setq version-control     t)  ;; 実行の有無
+(setq kept-new-versions   5)  ;; 最新の保持数
+(setq kept-old-versions   1)  ;; 最古の保持数
+(setq delete-old-versions t)  ;; 範囲外を削除
+;; (setq make-backup-files t)
+;; (setq backup-directory-alist
+;;   (cons (cons "\\.*$" (expand-file-name "~/.emacs.d/backup"))
+;;     backup-directory-alist))
 
 ;; create auto-save file in ~/.emacs.d/backup
 (setq auto-save-default t)
 (setq auto-save-file-name-transforms
       `((".*" ,(expand-file-name "~/.emacs.d/backup/") t)))
 
+(require 'undohist)
+(undohist-initialize)
+;;; 永続化を無視するファイル名の正規表現
+(setq undohist-ignored-files
+      '("/tmp/" "COMMIT_EDITMSG"))
+
+;; (require 'redo+)
+;; (global-set-key (kbd "C-M-/") 'redo)
+
+(require 'undo-tree)
+(global-undo-tree-mode t)
+(global-set-key (kbd "M-/") 'undo-tree-redo)
+
 ; tramp-modeではbashを使う(zshはハングするらしい)
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+
+; Dockerfile
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
+; git-gutter
+(global-git-gutter-mode t)
+
+; helm-flycheck
+(eval-after-load 'flycheck '(define-key flycheck-mode-map (kbd "C-c h") 'helm-flycheck))
