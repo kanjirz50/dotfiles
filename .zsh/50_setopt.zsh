@@ -1,6 +1,5 @@
 # cd先をディレクトリスタックに追加
 setopt auto_pushd
-# auto_cd
 setopt auto_cd
 setopt correct
 setopt list_packed
@@ -11,11 +10,16 @@ setopt mark_dirs             # ファイル名の展開でディレクトリに�
 setopt auto_param_keys       # カッコの対応などを自動的に補完
 
 setopt share_history        # share command history data
+setopt append_history
+setopt inc_append_history
 setopt hist_expand # 補完時にヒストリを自動的に展開
-
 setopt HIST_IGNORE_DUPS   # 前と重複する行は記録しない
 setopt HIST_FIND_NO_DUPS  # 履歴検索中、(連続してなくとも)重複を飛ばす
 setopt HIST_REDUCE_BLANKS # 余分な空白は詰めて記録
+setopt extended_history # ヒストリに実行時刻を追加
+HISTSIZE=5000000
+SAVEHIST=5000000
+
 
 # redirect_opt
 setopt multios
